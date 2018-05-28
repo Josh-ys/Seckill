@@ -13,7 +13,7 @@ public class firstController {
 
     @RequestMapping("/test")
     public String first() {
-        String s = "hello world";
+        String s = "hello world1";
         return s;
     }
 }
