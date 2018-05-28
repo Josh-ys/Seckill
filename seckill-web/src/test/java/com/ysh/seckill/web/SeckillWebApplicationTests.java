@@ -1,4 +1,4 @@
-package com.seckill.ysh.seckill;
+package com.ysh.seckill.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SeckillApplicationTests {
+public class SeckillWebApplicationTests {
 
 	@Test
 	public void contextLoads() {
