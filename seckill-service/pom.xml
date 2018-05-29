@@ -22,6 +22,11 @@
             <artifactId>seckill-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.ysh.seckill.common</groupId>
+            <artifactId>seckill-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

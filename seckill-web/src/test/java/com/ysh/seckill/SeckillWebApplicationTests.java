@@ -1,4 +1,4 @@
-package com.ysh.seckill.web;
+package com.ysh.seckill;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

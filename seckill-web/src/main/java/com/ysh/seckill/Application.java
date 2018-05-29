@@ -1,4 +1,4 @@
-package com.ysh.seckill.web;
+package com.ysh.seckill;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.ysh.seckill"})
 public class Application {
 
     public static void main(String[] args) {

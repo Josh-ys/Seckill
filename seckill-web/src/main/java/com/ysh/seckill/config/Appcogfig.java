@@ -1,4 +1,4 @@
-package com.ysh.seckill.web.config;
+package com.ysh.seckill.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
