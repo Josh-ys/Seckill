@@ -18,6 +18,8 @@ public class SeckillGoodsController {
     @Autowired
     private SeckillGoodsService seckillGoodsService;
 
+
+    @RequestMapping("/findList")
     public PageEntity<SeckillGoods> findByPage(Integer start, Integer limit) {
         return seckillGoodsService.pageQuery(start, limit);
     }

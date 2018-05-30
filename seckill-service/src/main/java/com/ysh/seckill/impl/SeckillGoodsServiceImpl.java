@@ -46,11 +46,11 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
                 //状态为审核通过
                 seckillGoods.add(criteriaBuilder.equal(root.get("status").as(String.class), "1"));
                 //库存大于0
-                seckillGoods.add(criteriaBuilder.greaterThan(root.get("stock_count").as(Integer.class), 0));
+                seckillGoods.add(criteriaBuilder.greaterThan(root.get("stockCount").as(Integer.class), 0));
                 //开始时间小于等于当前时间
-                seckillGoods.add(criteriaBuilder.lessThanOrEqualTo(root.get("start_time").as(Date.class), new Date()));
+                seckillGoods.add(criteriaBuilder.lessThanOrEqualTo(root.get("startTime").as(Date.class), new Date()));
                 //结束时间大于等于当前时间
-                seckillGoods.add(criteriaBuilder.greaterThanOrEqualTo(root.get("end_time").as(Date.class), new Date()));
+                seckillGoods.add(criteriaBuilder.greaterThanOrEqualTo(root.get("endTime").as(Date.class), new Date()));
                 return criteriaBuilder.and(seckillGoods.toArray(new Predicate[0]));
             }
         };
