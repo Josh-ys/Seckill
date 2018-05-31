@@ -3,6 +3,7 @@ package com.ysh.seckill.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,7 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name = "t_seckill_Order")
 @Data
-public class SeckillOrder {
+public class SeckillOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

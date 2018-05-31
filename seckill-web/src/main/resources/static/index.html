@@ -2,39 +2,25 @@
 <html>
 
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-    <title>正品秒杀！</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>品优购秒杀-正品秒杀！</title>
+    <link rel="icon" href="/assets/img/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="css/webbase.css"/>
-    <link rel="stylesheet" type="text/css" href="css/widget-jquery.autocomplete.css"/>
-    <link rel="stylesheet" type="text/css" href="css/pages-seckill-index.css"/>
 
-    <!--jquery-2.2.3.min.js引入-->
-    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/widget-jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckill-index.css" />
 
-    <!--引入angularjs-->
-    <script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="plugins/angularjs/angular.min.js"> </script>
+    <script type="text/javascript" src="js/base/base.js"> </script>
+    <script type="text/javascript" src="js/service/seckillGoodsService.js"> </script>
+    <script src="js/controller/seckillGoodsController.js"> </script>
 
-    <!--引入自定义的控制和业务层-->
-    <script src="js/base/base_pagination.js"></script>
-    <script src="js/controller/baseController.js"></script>
-    <script type="text/javascript" src="js/service/seckillGoodsService.js"></script>
-    <script src="js/controller/seckillGoodsController.js"></script>
-
-    <!-- 分页组件 -->
-    <script src="plugins/angularjs/pagination.js"></script>
-    <link rel="stylesheet" href="plugins/angularjs/pagination.css"/>
-    <link rel="stylesheet" href="js/css/page-style.css"/>
-
-    <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
-    <script type="text/javascript" src="js/widget/jquery.autocomplete.js"></script>
-    <script type="text/javascript" src="js/widget/nav.js"></script>
-    <script type="text/javascript" src="js/pages/seckill-index.js"></script>
 
 </head>
 
-<body ng-app="seckill" ng-controller="seckillGoodsController">
+<body ng-app="seckill" ng-controller="seckillGoodsController" ng-init="findAll()">
 <!-- 头部栏位 -->
 <!--页面顶部-->
 <div id="nav-bottom">
@@ -44,19 +30,19 @@
             <div class="py-container">
                 <div class="shortcut">
                     <ul class="fl">
-                        <li class="f-item">欢迎您！</li>
+                        <li class="f-item">品优购欢迎您！</li>
                         <li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
                     </ul>
                     <ul class="fr">
                         <li class="f-item">我的订单</li>
                         <li class="f-item space"></li>
-                        <li class="f-item"><a href="seckillOrder.html" target="_blank">我的</a></li>
+                        <li class="f-item"><a href="seckillOrder.html" target="_blank">我的品优购</a></li>
                         <li class="f-item space"></li>
-                        <li class="f-item">会员</li>
+                        <li class="f-item">品优购会员</li>
                         <li class="f-item space"></li>
                         <li class="f-item">企业采购</li>
                         <li class="f-item space"></li>
-                        <li class="f-item">关注</li>
+                        <li class="f-item">关注品优购</li>
                         <li class="f-item space"></li>
                         <li class="f-item" id="service">
                             <span>客户服务</span>
@@ -86,14 +72,14 @@
                             <form action="" class="sui-form form-inline">
                                 <!--searchAutoComplete-->
                                 <div class="input-append">
-                                    <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge"/>
+                                    <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge" />
                                     <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
                                 </div>
                             </form>
                         </div>
                         <div class="hotwords">
                             <ul>
-                                <li class="f-item">首发</li>
+                                <li class="f-item">品优购首发</li>
                                 <li class="f-item">亿元优惠</li>
                                 <li class="f-item">9.9元团购</li>
                                 <li class="f-item">每满99减30</li>
@@ -143,6 +129,36 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#service").hover(function(){
+            $(".service").show();
+        },function(){
+            $(".service").hide();
+        });
+        $("#shopcar").hover(function(){
+            $("#shopcarlist").show();
+        },function(){
+            $("#shopcarlist").hide();
+        });
+
+    })
+</script>
+<script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="js/widget/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="js/widget/nav.js"></script>
+<script type="text/javascript" src="js/pages/seckill-index.js"></script>
+<script>
+    $(function(){
+        $("#code").hover(function(){
+            $(".erweima").show();
+        },function(){
+            $(".erweima").hide();
+        });
+    })
+</script>
 </body>
 
 <div class="py-container index">
@@ -157,18 +173,18 @@
 
             <li class="seckill-item" ng-repeat="pojo in seckillList">
                 <div class="pic" onclick="location.href='seckill-item.html'">
-                    <img src="{{pojo.smallPic}}" width="290px" height="290px" alt=''>
+                    <img src="{{pojo.smallPic}}" width="290px" height="290px" alt=''  >
                 </div>
                 <div class="intro"><span>{{pojo.title}}</span></div>
                 <div class='price'><b class='sec-price'>￥{{pojo.costPrice}}</b><b class='ever-price'>￥{{pojo.price}}</b></div>
                 <div class='num'>
-                    <div>已售{{ ((pojo.num-pojo.stockCount)/pojo.num*100).toFixed(0) }}%</div>
+                    <div>已售{{  ((pojo.num-pojo.stockCount)/pojo.num*100).toFixed(0) }}%</div>
                     <div class='progress'>
                         <div class='sui-progress progress-danger'><span style='width: {{  ((pojo.num-pojo.stockCount)/pojo.num*100).toFixed(0) }}%;' class='bar'></span></div>
                     </div>
                     <div>剩余<b class='owned'>{{pojo.stockCount}}</b>件</div>
                 </div>
-                <a class='sui-btn btn-block btn-buy' href='seckill-item.html#?id={{pojo.id}}'>立即抢购</a>
+                <a class='sui-btn btn-block btn-buy' href='seckill-item.html#?id={{pojo.id}}' >立即抢购</a>
             </li>
 
 
@@ -176,7 +192,7 @@
     </div>
     <div class="cd-top">
         <div class="top">
-            <img src="img/_/gotop.png"/>
+            <img src="img/_/gotop.png" />
             <b>TOP</b>
         </div>
         <div class="code" id="code">
@@ -188,10 +204,7 @@
         </div>
     </div>
 </div>
-<!-- 分页 -->
-<div style="width: 1000px;margin-left: auto;margin-right: auto">
-    <tm-pagination conf="paginationConf"></tm-pagination>
-</div>
+
 <!--回到顶部-->
 
 <!-- 底部栏位 -->

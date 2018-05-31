@@ -1,5 +1,9 @@
 app.service('seckillGoodsService', function ($http) {
-    this.findByPage = function (page, size) {
-        return $http.get('/seckillGoods/findList?start=' + page + '&limit=' + size);
+    this.findAll = function () {
+        return $http.get('/seckillGoods/findList');
+    }
+
+    this.findById = function (id) {
+        return $http.get('/seckillGoods/findOne?id=' + id);
     }
 });

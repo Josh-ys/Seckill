@@ -7,21 +7,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>秒杀详细页</title>
 	 <link rel="icon" href="/assets/img/favicon.ico">
-	
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-zoom.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-seckill-item.css" />
     <link rel="stylesheet" type="text/css" href="css/widget-cartPanelView.css" />
-    
-    <script type="text/javascript" src="plugins/angularjs/angular.min.js"> </script>
-    <script type="text/javascript" src="js/base.js"> </script>
+
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js"> </script>
+	<script type="text/javascript" src="js/base/base.js"> </script>
 	<script type="text/javascript" src="js/service/seckillGoodsService.js"> </script>
 	<script src="js/controller/seckillGoodsController.js"> </script>
-	
 </head>
 
-<body ng-app="pinyougou" ng-controller="seckillGoodsController" ng-init="findOne()">
+<body ng-app="seckill" ng-controller="seckillGoodsController" ng-init="findOne()">
 	<!-- 头部栏位 -->
 	<!--页面顶部-->
 <div id="nav-bottom">
@@ -121,7 +119,7 @@
 							<li class="f-item">闪购</li>
 							<li class="f-item">团购</li>
 							<li class="f-item">有趣</li>
-							<li class="f-item"><a href="index.html" target="_blank">秒杀</a></li>
+							<li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>
 						</ul>
 					</div>
 					<div class="yui3-u Right"></div>
@@ -179,7 +177,7 @@ $(function(){
 					<div class="zoom">
 						<!--默认第一个预览-->
 						<div id="preview" class="spec-preview">
-							<span class="jqzoom"><img jqimg="{{entity.smallPic}}" src="{{entity.smallPic}}" width="400px" height="400px" /></span>
+							<span class="jqzoom"><img jqimg="{{entity.smallPic}}" src="{{entity.smallPic}}" width="400px" height="400px"/></span>
 						</div>						
 					</div>
 					
@@ -245,7 +243,7 @@ $(function(){
 							<div class="fl">
 								<ul class="btn-choose unstyled">
 									<li>
-										<a ng-click="submitOrder()" class="sui-btn  btn-danger addshopcar">立即抢购</a>
+										<a href="cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">立即抢购</a>
 									</li>
 								</ul>
 							</div>
@@ -417,7 +415,20 @@ $(function(){
 						<div class="tab-content tab-wraped">
 							<div id="one" class="tab-pane active">
 								<ul class="goods-intro unstyled">
-									
+									<li>分辨率：1920*1080(FHD)</li>
+									<li>后置摄像头：1200万像素</li>
+									<li>前置摄像头：500万像素</li>
+									<li>核 数：其他</li>
+									<li>频 率：以官网信息为准</li>
+									<li>品牌： Apple</li>
+									<li>商品名称：APPLEiPhone 6s Plus</li>
+									<li>商品编号：1861098</li>
+									<li>商品毛重：0.51kg</li>
+									<li>商品产地：中国大陆</li>
+									<li>热点：指纹识别，Apple Pay，金属机身，拍照神器</li>
+									<li>系统：苹果（IOS）</li>
+									<li>像素：1000-1600万</li>
+									<li>机身内存：64GB</li>
 								</ul>
 								<div class="intro-detail">
 									{{entity.introduction}}
