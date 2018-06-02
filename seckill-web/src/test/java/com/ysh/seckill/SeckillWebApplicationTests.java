@@ -1,6 +1,7 @@
 package com.ysh.seckill;
 
 import com.ysh.seckill.entity.SeckillGoods;
+import com.ysh.seckill.service.SeckillGoodsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class SeckillWebApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private SeckillGoodsService seckillGoodsService;
 
     @Test
     public void add() {
@@ -35,6 +39,12 @@ public class SeckillWebApplicationTests {
     public void delete(){
         Boolean name = redisTemplate.delete("seckillGoods");
         System.err.println(name);
+    }
+
+    @Test
+    public void test(){
+        boolean b = seckillGoodsService.emptySeckillGood(1L);
+        System.out.println(b);
     }
 
 }

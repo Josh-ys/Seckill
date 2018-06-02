@@ -3,10 +3,12 @@ package com.ysh.seckill.impl;
 import com.ysh.seckill.dao.SeckillGoodsRepository;
 import com.ysh.seckill.entity.SeckillGoods;
 import com.ysh.seckill.service.SeckillGoodsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,6 +23,7 @@ import java.util.List;
  * @date 2018/05/30 00:21
  */
 @Service
+@Slf4j
 public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Autowired
@@ -30,8 +33,9 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
     private RedisTemplate redisTemplate;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<SeckillGoods> findAll() {
-        List<SeckillGoods> seckillGoods = redisTemplate.boundHashOps("seckillGoods").values();
+        List<SeckillGoods> seckillGoods = redisTemplate.boundHashOps(SECKILL_GOODS_KEY).values();
         if (seckillGoods == null || seckillGoods.size() == 0) {
             // 封装Pageable对象
             Specification<SeckillGoods> specification = new Specification<SeckillGoods>() {
@@ -56,18 +60,30 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
             };
             seckillGoods = seckillGoodsRepository.findAll(specification);
             //将商品列表装入缓存
-            System.out.println("将秒杀商品列表装入缓存");
+            log.info("将秒杀商品列表装入缓存");
             for (SeckillGoods goods : seckillGoods) {
-                redisTemplate.boundHashOps("seckillGoods").put(goods.getId(), goods);
+                redisTemplate.boundHashOps(SECKILL_GOODS_KEY).put(goods.getId(), goods);
             }
         } else {
-            System.err.println("缓存读取");
+            log.info("缓存读取");
         }
         return seckillGoods;
     }
 
     @Override
     public SeckillGoods findById(Long id) {
-        return (SeckillGoods) redisTemplate.boundHashOps("seckillGoods").get(id);
+        return (SeckillGoods) redisTemplate.boundHashOps(SECKILL_GOODS_KEY).get(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean reduceNumber(Long id, Date killTime) {
+        return seckillGoodsRepository.reduceNumber(id, killTime) > 0 ? true : false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean emptySeckillGood(Long id) {
+        return seckillGoodsRepository.emptySeckillGood(id) > 0 ? true : false;
     }
 }

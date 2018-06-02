@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2018/05/30 00:20
  */
 public interface SeckillOrderRepository extends JpaRepository<SeckillOrder, Long>, JpaSpecificationExecutor<SeckillOrder> {
+
+
 }
