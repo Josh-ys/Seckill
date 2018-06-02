@@ -16,7 +16,6 @@ import java.util.Date;
 @Data
 public class SeckillOrder implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     /**
@@ -27,7 +26,7 @@ public class SeckillOrder implements Serializable {
     /**
      * 支付金额
      */
-    @Column
+    @Column(name = "money")
     private BigDecimal money;
     /**
      * 用户
@@ -54,7 +53,7 @@ public class SeckillOrder implements Serializable {
     /**
      * 状态
      */
-    @Column
+    @Column(name = "status")
     private String status;
     /**
      * 收货人地址
@@ -69,7 +68,7 @@ public class SeckillOrder implements Serializable {
     /**
      * 收货人
      */
-    @Column
+    @Column(name = "receiver")
     private String receiver;
     /**
      * 交易流水

@@ -19,7 +19,6 @@ public interface SeckillGoodsService {
     String SECKILL_GOODS_KEY = "seckillGoods";
 
     /**
-     * 带条件的分页查询
      * 查询正在秒杀的商品列表
      *
      * @return
@@ -28,7 +27,7 @@ public interface SeckillGoodsService {
 
     /**
      * 查询商品详情
-     * 从缓冲中
+     * 从缓存中
      *
      * @param id
      * @return
@@ -51,4 +50,18 @@ public interface SeckillGoodsService {
      * @return
      */
     boolean emptySeckillGood(Long id);
+
+    /**
+     * 从数据库查询
+     *
+     * @param id
+     * @return
+     */
+    SeckillGoods findByIdInDb(Long id);
+
+    /**
+     * 更新数据库
+     * @param seckillGoods
+     */
+    void addStockCountOne(SeckillGoods seckillGoods);
 }

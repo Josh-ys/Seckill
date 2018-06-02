@@ -17,6 +17,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author joey
@@ -85,5 +86,30 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public boolean emptySeckillGood(Long id) {
         return seckillGoodsRepository.emptySeckillGood(id) > 0 ? true : false;
+    }
+
+    @Override
+    public SeckillGoods findByIdInDb(Long id) {
+        if (id == null || id <= 0) {
+            log.error("从数据库查询的商品，传进来的商品id为空={}", id);
+            return null;
+        }
+        Optional<SeckillGoods> goods = seckillGoodsRepository.findOne((root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(criteriaBuilder.equal(root.get("id").as(Long.class), id));
+            //状态为审核通过
+            predicates.add(criteriaBuilder.equal(root.get("status").as(String.class), "1"));
+            //开始时间小于等于当前时间
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("startTime").as(Date.class), new Date()));
+            //结束时间大于等于当前时间
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("endTime").as(Date.class), new Date()));
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        });
+        return goods.isPresent() ? goods.get() : null;
+    }
+
+    @Override
+    public void addStockCountOne(SeckillGoods seckillGoods) {
+        seckillGoodsRepository.save(seckillGoods);
     }
 }

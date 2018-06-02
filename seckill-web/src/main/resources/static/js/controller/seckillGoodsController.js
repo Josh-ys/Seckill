@@ -17,6 +17,7 @@ app.controller('seckillGoodsController', function ($scope, $location, $controlle
                 //获取从结束时间到当前日期的秒数
                 allsecond = Math.floor((new Date($scope.entity.endTime).getTime() - new Date().getTime()) / 1000);
 
+                //定时任务
                 time = $interval(function () {
                     allsecond = allsecond - 1;
                     $scope.timeString = convertTimeString(allsecond);
@@ -29,6 +30,19 @@ app.controller('seckillGoodsController', function ($scope, $location, $controlle
             }
         );
     }
+
+    //订单
+    $scope.submitOrder = function () {
+        seckillGoodsService.submitOrder($scope.entity.id, $scope.entity.id).success(function (response) {
+            if (response.flag) {
+                alert("下单成功！ 请在5分钟内完成支付！！");
+                location.href = "pay.html#?id=" + $scope.entity.id;
+            } else {
+                alert(response.respMsg);
+            }
+        });
+    }
+
 
     //转换秒为   天小时分钟秒格式  XXX天 10:22:33
     convertTimeString = function (allsecond) {

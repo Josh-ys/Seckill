@@ -41,4 +41,5 @@ public interface SeckillGoodsRepository extends JpaRepository<SeckillGoods, Long
     @Modifying
     @Query("update SeckillGoods set stockCount=0 where id = :id")
     int emptySeckillGood(@Param("id") Long id);
+
 }
